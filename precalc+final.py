@@ -1,3 +1,5 @@
+import numpy as np
+
 """
 Requirements:
 - create a main function that can only find the sine of an angle between 0 and 45 degrees ✔️
@@ -8,6 +10,8 @@ Requirements:
     - cannot use any polynomial approximations ✔️
     - cannot use any pre-existing libraries ✔️
 """
+
+pi = np.pi
 
 def sin(x, degree):
     
