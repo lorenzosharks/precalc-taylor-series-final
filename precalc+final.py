@@ -71,11 +71,23 @@ def float_check(value):
 
 def sin(x, accuracy):
     
-    if x > 2*pi or x < 0:
-        reduction = round(x/(2*pi))*2*pi
-        x = abs(x - reduction)
-    
-    print(f"{x}")
+    if x > 2*pi:
+        minus = False
+        
+        while not minus:
+            if x > 2*pi:
+                x = x - 2*pi
+            else:
+                minus = True
+
+    elif x < 0:
+        plus = False
+        
+        while not plus:
+            if x < 0:
+                x = x + 2*pi
+            else:
+                plus = True    
     
     def factorial(number):
     
