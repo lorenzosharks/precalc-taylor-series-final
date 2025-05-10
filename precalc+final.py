@@ -18,7 +18,9 @@ def sin(x, degree):
     i = 1
     
     terms = []
-       
+    
+    o = round(x/(2*pi))*2*pi
+     
     def factorial(number):
     
         # This is a function to calculate the factorial of a number by starting from one and multiplying until it reaches the desired number
@@ -38,7 +40,7 @@ def sin(x, degree):
         
         denominator = int(factorial(2*i-1))
         
-        numerator = (x)**(2*i-1)
+        numerator = (x-o)**(2*i-1)
         
         a = ((-1)**(i-1)) * (numerator/denominator)
         
