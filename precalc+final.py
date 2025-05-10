@@ -10,17 +10,15 @@ Requirements:
     - cannot use any polynomial approximations ✔️
     - cannot use any pre-existing libraries ✔️
 """
+#-----------------------------------------------------------------------------------------------------------------------------------
 
 pi = np.pi
 
+#-----------------------------------------------------------------------------------------------------------------------------------
+
+"""
 def sin(x, degree):
     
-    i = 1
-    
-    terms = []
-    
-    o = round(x/(2*pi))*2*pi
-     
     def factorial(number):
     
         # This is a function to calculate the factorial of a number by starting from one and multiplying until it reaches the desired number
@@ -35,7 +33,13 @@ def sin(x, degree):
             start = start * i
             
         return start
-        
+    
+    i = 1
+    
+    terms = []
+    
+    o = round(x/(2*pi))*2*pi
+      
     while i <= degree:
         
         denominator = int(factorial(2*i-1))
@@ -49,7 +53,98 @@ def sin(x, degree):
         i = i + 1
         
     return sum(terms)
-      
+"""
+
+def int_check(value):
+    try:
+        int(value)
+        return True
+    except ValueError:
+        return False
+    
+def float_check(value):
+    try:
+        float(value)
+        return True
+    except ValueError:
+        return False
+
+def sin(x, accuracy):
+    
+    if x > 2*pi or x < 0:
+        reduction = round(x/(2*pi))*2*pi
+        x = abs(x - reduction)
+    
+    print(f"{x}")
+    
+    def factorial(number):
+    
+        # This is a function to calculate the factorial of a number by starting from one and multiplying until it reaches the desired number
+        
+        start = 1
+        
+        for i in range(1, number + 1, 1):
+            # 1st parameter in the range funtion is the starting value
+            # 2nd parameter is the last value (not included)
+            # 3rd parameter is the increment
+    
+            start = start * i
+            
+        return start
+    
+    def tp(x, precision):
+            
+        i = 1
+        
+        terms = []
+        
+        o = round(x/(2*pi))*2*pi
+          
+        while i <= precision:
+            
+            denominator = int(factorial(2*i-1))
+            
+            numerator = (x-o)**(2*i-1)
+            
+            a = ((-1)**(i-1)) * (numerator/denominator)
+            
+            terms.append(a)
+            
+            i = i + 1
+            
+        return sum(terms) 
+    
+    def sqrt(x):
+        x = x**0.5
+        return x
+    
+    if (0*pi)/4 < x < (1*pi)/4:
+        result = tp(x, accuracy)
+        
+    if (1*pi)/4 < x < (2*pi)/4:
+        result = sqrt(1-( tp( (pi/2)-x, accuracy) )**2 )
+        
+    if (2*pi)/4 < x < (3*pi)/4:
+        result = sqrt(1-( tp( x-(pi/2), accuracy) )**2 )
+        
+    if (3*pi)/4 < x < (4*pi)/4:
+        result = tp(pi-x, accuracy)
+        
+    if (4*pi)/4 < x < (5*pi)/4:
+        result = -tp(x-pi, accuracy)
+        
+    if (5*pi)/4 < x < (6*pi)/4:
+        result = -sqrt(1-( tp( (3*pi/2)-x, accuracy) )**2 )
+        
+    if (6*pi)/4 < x < (7*pi)/4:
+        result = -sqrt(1-( tp( x-(3*pi/2), accuracy) )**2 )
+        
+    if (7*pi)/4 < x < (8*pi)/4:
+        result = -tp(2*pi-x, accuracy)
+        
+        
+    return result
+          
 def cos(x, degree):
     return sin(x + (pi/2), degree)
 
@@ -58,6 +153,8 @@ def tan(x, degree):
     denominator = cos(x, degree)
     
     return numerator/denominator
+
+#-----------------------------------------------------------------------------------------------------------------------------------
 
 print("This program finds the values of trignometric functions.")
 print("Note: This assumes your vaules are in radians.")
@@ -71,13 +168,43 @@ print("3) tan(x)")
 
 print("")
 
-choice = int(input("Be not afraid! Enter here: "))
+#-----------------------------------------------------------------------------------------------------------------------------------
+
+choice = input("Be not afraid! Enter here: ")
+
+proceed = False
+
+while not proceed:
+    
+    if int_check(choice):
+        choice = int(choice)
+        if choice < 1 or choice > 3:
+            print("Try again fool.")
+            choice = int(input("Enter here once again: "))
+        else:
+            proceed = True
+    else:
+        print("YOU DARE FOOL ME, PUNY HUMAN? TRY AGAIN!")
+        choice = input("Enter here once again: ")
+        proceed = False
+
 print("What is thy angle, mortal!")
-angle = float(input(""))
 
+angle = input("")
 
-if angle >= 2*pi:
-    angle 
+proceed2 = False
+
+while not proceed2:    
+    
+    if float_check(angle):
+        angle = float(angle)
+        proceed2 = True
+    else:
+        print("YOU DARE FOOL ME, PUNY HUMAN? TRY AGAIN!")
+        angle = input("Enter here once again: ")
+        proceed2 = False
+
+#-----------------------------------------------------------------------------------------------------------------------------------
 
 if choice == 1:
     
