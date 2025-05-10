@@ -38,7 +38,7 @@ def sin(x, degree):
         
         denominator = int(factorial(2*i-1))
         
-        numerator = x**(2*i-1)
+        numerator = (x)**(2*i-1)
         
         a = ((-1)**(i-1)) * (numerator/denominator)
         
@@ -72,6 +72,10 @@ print("")
 choice = int(input("Be not afraid! Enter here: "))
 print("What is thy angle, mortal!")
 angle = float(input(""))
+
+
+if angle >= 2*pi:
+    angle 
 
 if choice == 1:
     
