@@ -11,10 +11,11 @@ Requirements:
     - cannot use any pre-existing libraries ✔️
 """
 #-----------------------------------------------------------------------------------------------------------------------------------
-
+#Defining pi
 pi = np.pi
 
 #-----------------------------------------------------------------------------------------------------------------------------------
+#Functions
 
 """
 def sin(x, degree):
@@ -105,14 +106,12 @@ def sin(x, accuracy):
         return start
     
     def tp(x, precision):
-            
-        i = 1
         
         terms = []
         
         o = round(x/(2*pi))*2*pi
           
-        while i <= precision:
+        for i in range(1, 1+precision, 1):
             
             denominator = int(factorial(2*i-1))
             
@@ -121,8 +120,7 @@ def sin(x, accuracy):
             a = ((-1)**(i-1)) * (numerator/denominator)
             
             terms.append(a)
-            
-            i = i + 1
+
             
         return sum(terms) 
     
@@ -130,7 +128,7 @@ def sin(x, accuracy):
         x = x**0.5
         return x
     
-    if (0*pi)/4 < x < (1*pi)/4:
+    if (0*pi)/4 <= x <= (1*pi)/4:
         result = tp(x, accuracy)
         
     if (1*pi)/4 < x < (2*pi)/4:
@@ -167,7 +165,7 @@ def tan(x, degree):
     return numerator/denominator
 
 #-----------------------------------------------------------------------------------------------------------------------------------
-
+#Actual display
 print("This program finds the values of trignometric functions.")
 print("Note: This assumes your vaules are in radians.")
 
@@ -218,9 +216,11 @@ while not proceed2:
 
 #-----------------------------------------------------------------------------------------------------------------------------------
 
+highest_degree = 13
+
 if choice == 1:
     
-    answer = round(sin(angle, 13), 3)
+    answer = round(sin(angle, highest_degree), 3)
     
     if answer == -0.0:
         answer = 0.0
@@ -228,7 +228,7 @@ if choice == 1:
     print(f"Thy answer is {answer}!")
 elif choice == 2:
     
-    answer = round(cos(angle, 13), 3)
+    answer = round(cos(angle, highest_degree), 3)
     
     if answer == -0.0:
         answer = 0.0
@@ -236,7 +236,7 @@ elif choice == 2:
     print(f"Thy answer is {answer}!")    
 elif choice == 3:
 
-    answer = round(tan(angle, 13), 3)
+    answer = round(tan(angle, highest_degree), 3)
     
     if answer == -0.0:
         answer = 0.0
