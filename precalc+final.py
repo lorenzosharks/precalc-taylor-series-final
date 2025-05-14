@@ -16,46 +16,6 @@ pi = np.pi
 
 #-----------------------------------------------------------------------------------------------------------------------------------
 #Functions
-
-"""
-def sin(x, degree):
-    
-    def factorial(number):
-    
-        # This is a function to calculate the factorial of a number by starting from one and multiplying until it reaches the desired number
-        
-        start = 1
-        
-        for i in range(1, number + 1, 1):
-            # 1st parameter in the range funtion is the starting value
-            # 2nd parameter is the last value (not included)
-            # 3rd parameter is the increment
-    
-            start = start * i
-            
-        return start
-    
-    i = 1
-    
-    terms = []
-    
-    o = round(x/(2*pi))*2*pi
-      
-    while i <= degree:
-        
-        denominator = int(factorial(2*i-1))
-        
-        numerator = (x-o)**(2*i-1)
-        
-        a = ((-1)**(i-1)) * (numerator/denominator)
-        
-        terms.append(a)
-        
-        i = i + 1
-        
-    return sum(terms)
-"""
-
 def int_check(value):
     try:
         int(value)
@@ -69,28 +29,6 @@ def float_check(value):
         return True
     except ValueError:
         return False
-
-def bounding(x):
-    
-    if x > 2*pi:
-        minus = False
-        
-        while not minus:
-            if x > 2*pi:
-                x = x - 2*pi
-            else:
-                minus = True
-    
-    elif x < 0:
-        plus = False
-        
-        while not plus:
-            if x < 0:
-                x = x + 2*pi
-            else:
-                plus = True
-                
-    return x   
 
 """
 
@@ -129,34 +67,26 @@ def sin(x, precision):
 
 """
     
-def sin(x, precision):
-    
-    terms = []
-    
-    o = round(x/(2*pi))*2*pi
-      
-    for i in range(1, 1+precision, 1):
-        
-        start = 1
-    
-        for i in range(1, i + 1, 1):
-            # 1st parameter in the range funtion is the starting value
-            # 2nd parameter is the last value (not included)
-            # 3rd parameter is the increment
-    
-            start = start * i
-        
-        denominator = start
-        
-        numerator = (x-o)**(2*i-1)
-        
-        a = ((-1)**(i-1)) * (numerator/denominator)
-        
-        terms.append(a)
-        
-    return sum(terms)
-
 def answer(x, accuracy):  
+    
+    if x > 2*pi:
+        minus = False
+        
+        while not minus:
+            if x > 2*pi:
+                x = x - 2*pi
+            else:
+                minus = True
+    
+    elif x < 0:
+        plus = False
+        
+        while not plus:
+            if x < 0:
+                x = x + 2*pi
+            else:
+                plus = True
+    
     def sqrt(x):
         x = x**0.5
         return x
@@ -188,11 +118,37 @@ def answer(x, accuracy):
         
     return result
           
+def sin(x, precision):
+    
+    terms = []
+      
+    for i in range(1, 1+precision, 1):
+                
+        start=1
+        b=1
+        
+        for b in range(1, 2*i, 1):
+            # 1st parameter in the range funtion is the starting value
+            # 2nd parameter is the last value (not included)
+            # 3rd parameter is the increment
+                        
+            start = start * b
+        
+        denominator = start
+        
+        numerator = (x)**(2*i-1)
+        
+        a = ((-1)**(i-1)) * (numerator/denominator)
+        
+        terms.append(a)
+
+    return sum(terms)
+
 def cos(x, degree):
-    return sin(x + (pi/2), degree)
+    return answer(x + (pi/2), degree)
 
 def tan(x, degree):
-    numerator = sin(x, degree)
+    numerator = answer(x, degree)
     denominator = cos(x, degree)
     
     return numerator/denominator
@@ -253,25 +209,25 @@ highest_degree = 13
 
 if choice == 1:
     
-    answer = round(sin(angle, highest_degree), 3)
+    final_answer = round(answer(angle, highest_degree), 3)
     
-    if answer == -0.0:
-        answer = 0.0
+    if final_answer == -0.0:
+        final_answer = 0.0
     
-    print(f"Thy answer is {answer}!")
+    print(f"Thy answer is {final_answer}!")
 elif choice == 2:
     
-    answer = round(cos(angle, highest_degree), 3)
+    final_answer = round(cos(angle, highest_degree), 3)
     
-    if answer == -0.0:
-        answer = 0.0
+    if final_answer == -0.0:
+        final_answer = 0.0
         
-    print(f"Thy answer is {answer}!")    
+    print(f"Thy answer is {final_answer}!")    
 elif choice == 3:
 
-    answer = round(tan(angle, highest_degree), 3)
+    final_answer = round(tan(angle, highest_degree), 3)
     
-    if answer == -0.0:
-        answer = 0.0
+    if final_answer == -0.0:
+        final_answer = 0.0
     
-    print(f"Thy answer is {answer}!")
+    print(f"Thy answer is {final_answer}!")
