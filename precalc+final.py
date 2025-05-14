@@ -95,35 +95,35 @@ def sqrt(x):
     x = x**0.5
     return x
 
-def answer(x, accuracy):      
+def smart_sin(x, accuracy):      
         
     if (0*pi)/4 <= x <= (1*pi)/4:
-        result = sin(x, accuracy)
+        result = not_numpy_sin(x, accuracy)
         
     if (1*pi)/4 < x < (2*pi)/4:
-        result = sqrt(1-( sin( (pi/2)-x, accuracy) )**2 )
+        result = sqrt(1-( not_numpy_sin( (pi/2)-x, accuracy) )**2 )
         
     if (2*pi)/4 < x < (3*pi)/4:
-        result = sqrt(1-( sin( x-(pi/2), accuracy) )**2 )
+        result = sqrt(1-( not_numpy_sin( x-(pi/2), accuracy) )**2 )
         
     if (3*pi)/4 < x < (4*pi)/4:
-        result = sin(pi-x, accuracy)
+        result = not_numpy_sin(pi-x, accuracy)
         
     if (4*pi)/4 < x < (5*pi)/4:
-        result = -sin(x-pi, accuracy)
+        result = -not_numpy_sin(x-pi, accuracy)
         
     if (5*pi)/4 < x < (6*pi)/4:
-        result = -sqrt(1-( sin( (3*pi/2)-x, accuracy) )**2 )
+        result = -sqrt(1-( not_numpy_sin( (3*pi/2)-x, accuracy) )**2 )
         
     if (6*pi)/4 < x < (7*pi)/4:
-        result = -sqrt(1-( sin( x-(3*pi/2), accuracy) )**2 )
+        result = -sqrt(1-( not_numpy_sin( x-(3*pi/2), accuracy) )**2 )
         
     if (7*pi)/4 < x < (8*pi)/4:
-        result = -sin(2*pi-x, accuracy)
+        result = -not_numpy_sin(2*pi-x, accuracy)
         
     return result
           
-def sin(x, precision):
+def not_numpy_sin(x, precision):
     
     terms = []
       
@@ -149,12 +149,12 @@ def sin(x, precision):
 
     return sum(terms)
 
-def cos(x, degree):
-    return answer(x + (pi/2), degree)
+def not_numpy_cos(x, degree):
+    return smart_sin(x + (pi/2), degree)
 
-def tan(x, degree):
-    numerator = answer(x, degree)
-    denominator = cos(x, degree)
+def not_numpy_tan(x, degree):
+    numerator = smart_sin(x, degree)
+    denominator = not_numpy_cos(x, degree)
     
     return numerator/denominator
 
@@ -219,7 +219,7 @@ highest_degree = 13
 
 if choice == 1:
     
-    final_answer = round(answer(bounding(angle), highest_degree), 3)
+    final_answer = round(smart_sin(bounding(angle), highest_degree), 3)
     
     if final_answer == -0.0:
         final_answer = 0.0
@@ -228,7 +228,7 @@ if choice == 1:
     
 elif choice == 2:
     
-    final_answer = round(cos(bounding(angle), highest_degree), 3)
+    final_answer = round(not_numpy_cos(bounding(angle), highest_degree), 3)
     
     if final_answer == -0.0:
         final_answer = 0.0
@@ -237,7 +237,7 @@ elif choice == 2:
     
 elif choice == 3:
 
-    final_answer = round(tan(bounding(angle), highest_degree), 3)
+    final_answer = round(not_numpy_tan(bounding(angle), highest_degree), 3)
     
     if final_answer == -0.0:
         final_answer = 0.0
