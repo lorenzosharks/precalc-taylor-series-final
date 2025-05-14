@@ -67,8 +67,7 @@ def sin(x, precision):
 
 """
     
-def answer(x, accuracy):  
-    
+def bounding(x):
     if x > 2*pi:
         minus = False
         
@@ -86,10 +85,17 @@ def answer(x, accuracy):
                 x = x + 2*pi
             else:
                 plus = True
-    
-    def sqrt(x):
-        x = x**0.5
+                
+    else:
         return x
+    
+    return x
+
+def sqrt(x):
+    x = x**0.5
+    return x
+
+def answer(x, accuracy):      
         
     if (0*pi)/4 <= x <= (1*pi)/4:
         result = sin(x, accuracy)
@@ -114,7 +120,6 @@ def answer(x, accuracy):
         
     if (7*pi)/4 < x < (8*pi)/4:
         result = -sin(2*pi-x, accuracy)
-        
         
     return result
           
@@ -153,6 +158,31 @@ def tan(x, degree):
     
     return numerator/denominator
 
+def angle_check(float_check, angle, proceed2):
+    while not proceed2:    
+        if float_check(angle):
+            angle = float(angle)
+            proceed2 = True
+        else:
+            print("YOU DARE FOOL ME, PUNY HUMAN? TRY AGAIN!")
+            angle = input("Enter here once again: ")
+            proceed2 = False
+    return angle
+
+def input_check(int_check, choice, proceed):
+    while not proceed:
+        if int_check(choice):
+            choice = int(choice)
+            if choice < 1 or choice > 3:
+                print("Try again fool.")
+                choice = int(input("Enter here once again: "))
+            else:
+                proceed = True
+        else:
+            print("YOU DARE FOOL ME, PUNY HUMAN? TRY AGAIN!")
+            choice = input("Enter here once again: ")
+            proceed = False
+    return choice
 #-----------------------------------------------------------------------------------------------------------------------------------
 #Actual display
 print("This program finds the values of trignometric functions.")
@@ -173,19 +203,7 @@ choice = input("Be not afraid! Enter here: ")
 
 proceed = False
 
-while not proceed:
-    
-    if int_check(choice):
-        choice = int(choice)
-        if choice < 1 or choice > 3:
-            print("Try again fool.")
-            choice = int(input("Enter here once again: "))
-        else:
-            proceed = True
-    else:
-        print("YOU DARE FOOL ME, PUNY HUMAN? TRY AGAIN!")
-        choice = input("Enter here once again: ")
-        proceed = False
+choice = input_check(int_check, choice, proceed)
 
 print("What is thy angle, mortal!")
 
@@ -193,15 +211,7 @@ angle = input("")
 
 proceed2 = False
 
-while not proceed2:    
-    
-    if float_check(angle):
-        angle = float(angle)
-        proceed2 = True
-    else:
-        print("YOU DARE FOOL ME, PUNY HUMAN? TRY AGAIN!")
-        angle = input("Enter here once again: ")
-        proceed2 = False
+angle = angle_check(float_check, angle, proceed2)
 
 #-----------------------------------------------------------------------------------------------------------------------------------
 
@@ -209,23 +219,25 @@ highest_degree = 13
 
 if choice == 1:
     
-    final_answer = round(answer(angle, highest_degree), 3)
+    final_answer = round(answer(bounding(angle), highest_degree), 3)
     
     if final_answer == -0.0:
         final_answer = 0.0
     
     print(f"Thy answer is {final_answer}!")
+    
 elif choice == 2:
     
-    final_answer = round(cos(angle, highest_degree), 3)
+    final_answer = round(cos(bounding(angle), highest_degree), 3)
     
     if final_answer == -0.0:
         final_answer = 0.0
         
     print(f"Thy answer is {final_answer}!")    
+    
 elif choice == 3:
 
-    final_answer = round(tan(angle, highest_degree), 3)
+    final_answer = round(tan(bounding(angle), highest_degree), 3)
     
     if final_answer == -0.0:
         final_answer = 0.0
