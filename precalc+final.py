@@ -70,7 +70,7 @@ def float_check(value):
     except ValueError:
         return False
 
-def sin(x, accuracy):
+def bounding(x):
     
     if x > 2*pi:
         minus = False
@@ -80,7 +80,7 @@ def sin(x, accuracy):
                 x = x - 2*pi
             else:
                 minus = True
-
+    
     elif x < 0:
         plus = False
         
@@ -88,69 +88,102 @@ def sin(x, accuracy):
             if x < 0:
                 x = x + 2*pi
             else:
-                plus = True    
+                plus = True
+                
+    return x   
+
+"""
+
+def factorial(number):
+
+    # This is a function to calculate the factorial of a number by starting from one and multiplying until it reaches the desired number
     
-    def factorial(number):
+    start = 1
     
-        # This is a function to calculate the factorial of a number by starting from one and multiplying until it reaches the desired number
+    for i in range(1, number + 1, 1):
+        # 1st parameter in the range funtion is the starting value
+        # 2nd parameter is the last value (not included)
+        # 3rd parameter is the increment
+
+        start = start * i
+        
+    return start
+    
+def sin(x, precision):
+    
+    terms = []
+    
+    o = round(x/(2*pi))*2*pi
+      
+    for i in range(1, 1+precision, 1):
+        
+        denominator = int(factorial(2*i-1))
+        
+        numerator = (x-o)**(2*i-1)
+        
+        a = ((-1)**(i-1)) * (numerator/denominator)
+        
+        terms.append(a)
+        
+    return sum(terms)
+
+"""
+    
+def sin(x, precision):
+    
+    terms = []
+    
+    o = round(x/(2*pi))*2*pi
+      
+    for i in range(1, 1+precision, 1):
         
         start = 1
-        
-        for i in range(1, number + 1, 1):
+    
+        for i in range(1, i + 1, 1):
             # 1st parameter in the range funtion is the starting value
             # 2nd parameter is the last value (not included)
             # 3rd parameter is the increment
     
             start = start * i
-            
-        return start
-    
-    def tp(x, precision):
         
-        terms = []
+        denominator = start
         
-        o = round(x/(2*pi))*2*pi
-          
-        for i in range(1, 1+precision, 1):
-            
-            denominator = int(factorial(2*i-1))
-            
-            numerator = (x-o)**(2*i-1)
-            
-            a = ((-1)**(i-1)) * (numerator/denominator)
-            
-            terms.append(a)
+        numerator = (x-o)**(2*i-1)
+        
+        a = ((-1)**(i-1)) * (numerator/denominator)
+        
+        terms.append(a)
+        
+    return sum(terms)
 
-            
-        return sum(terms) 
-    
+def answer(x, accuracy):  
     def sqrt(x):
         x = x**0.5
         return x
-    
+        
     if (0*pi)/4 <= x <= (1*pi)/4:
-        result = tp(x, accuracy)
+        result = sin(x, accuracy)
         
     if (1*pi)/4 < x < (2*pi)/4:
-        result = sqrt(1-( tp( (pi/2)-x, accuracy) )**2 )
+        result = sqrt(1-( sin( (pi/2)-x, accuracy) )**2 )
         
     if (2*pi)/4 < x < (3*pi)/4:
-        result = sqrt(1-( tp( x-(pi/2), accuracy) )**2 )
+        result = sqrt(1-( sin( x-(pi/2), accuracy) )**2 )
         
     if (3*pi)/4 < x < (4*pi)/4:
-        result = tp(pi-x, accuracy)
+        result = sin(pi-x, accuracy)
         
     if (4*pi)/4 < x < (5*pi)/4:
-        result = -tp(x-pi, accuracy)
+        result = -sin(x-pi, accuracy)
         
     if (5*pi)/4 < x < (6*pi)/4:
-        result = -sqrt(1-( tp( (3*pi/2)-x, accuracy) )**2 )
+        result = -sqrt(1-( sin( (3*pi/2)-x, accuracy) )**2 )
         
     if (6*pi)/4 < x < (7*pi)/4:
-        result = -sqrt(1-( tp( x-(3*pi/2), accuracy) )**2 )
+        result = -sqrt(1-( sin( x-(3*pi/2), accuracy) )**2 )
         
     if (7*pi)/4 < x < (8*pi)/4:
-        result = -tp(2*pi-x, accuracy)
+        result = -sin(2*pi-x, accuracy)
         
         
     return result
