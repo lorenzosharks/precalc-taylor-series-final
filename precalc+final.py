@@ -100,25 +100,25 @@ def smart_sin(x, accuracy):
     if (0*pi)/4 <= x <= (1*pi)/4:
         result = not_numpy_sin(x, accuracy)
         
-    if (1*pi)/4 < x < (2*pi)/4:
+    if (1*pi)/4 < x <= (2*pi)/4:
         result = sqrt(1-( not_numpy_sin( (pi/2)-x, accuracy) )**2 )
         
-    if (2*pi)/4 < x < (3*pi)/4:
+    if (2*pi)/4 < x <= (3*pi)/4:
         result = sqrt(1-( not_numpy_sin( x-(pi/2), accuracy) )**2 )
         
-    if (3*pi)/4 < x < (4*pi)/4:
+    if (3*pi)/4 < x <= (4*pi)/4:
         result = not_numpy_sin(pi-x, accuracy)
         
-    if (4*pi)/4 < x < (5*pi)/4:
+    if (4*pi)/4 < x <= (5*pi)/4:
         result = -not_numpy_sin(x-pi, accuracy)
         
-    if (5*pi)/4 < x < (6*pi)/4:
+    if (5*pi)/4 < x <= (6*pi)/4:
         result = -sqrt(1-( not_numpy_sin( (3*pi/2)-x, accuracy) )**2 )
         
-    if (6*pi)/4 < x < (7*pi)/4:
+    if (6*pi)/4 < x <= (7*pi)/4:
         result = -sqrt(1-( not_numpy_sin( x-(3*pi/2), accuracy) )**2 )
         
-    if (7*pi)/4 < x < (8*pi)/4:
+    if (7*pi)/4 < x <= (8*pi)/4:
         result = -not_numpy_sin(2*pi-x, accuracy)
         
     return result
