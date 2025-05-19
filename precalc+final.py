@@ -94,35 +94,7 @@ def bounding(x):
 def sqrt(x):
     x = x**0.5
     return x
-
-def smart_sin(x, accuracy):      
-        
-    if (0*pi)/4 <= x <= (1*pi)/4:
-        result = not_numpy_sin(x, accuracy)
-        
-    if (1*pi)/4 < x <= (2*pi)/4:
-        result = sqrt(1-( not_numpy_sin( (pi/2)-x, accuracy) )**2 )
-        
-    if (2*pi)/4 < x <= (3*pi)/4:
-        result = sqrt(1-( not_numpy_sin( x-(pi/2), accuracy) )**2 )
-        
-    if (3*pi)/4 < x <= (4*pi)/4:
-        result = not_numpy_sin(pi-x, accuracy)
-        
-    if (4*pi)/4 < x <= (5*pi)/4:
-        result = -not_numpy_sin(x-pi, accuracy)
-        
-    if (5*pi)/4 < x <= (6*pi)/4:
-        result = -sqrt(1-( not_numpy_sin( (3*pi/2)-x, accuracy) )**2 )
-        
-    if (6*pi)/4 < x <= (7*pi)/4:
-        result = -sqrt(1-( not_numpy_sin( x-(3*pi/2), accuracy) )**2 )
-        
-    if (7*pi)/4 < x <= (8*pi)/4:
-        result = -not_numpy_sin(2*pi-x, accuracy)
-        
-    return result
-          
+  
 def not_numpy_sin(x, precision):
     
     terms = []
@@ -153,12 +125,12 @@ def not_numpy_cos(x, degree):
     return smart_sin(x + (pi/2), degree)
 
 def not_numpy_tan(x, degree):
-    numerator = smart_sin(x, degree)
+    numerator = smart_sin(bounding(x), degree)
     denominator = not_numpy_cos(x, degree)
     
     return numerator/denominator
 
-def angle_check(float_check, angle, proceed2):
+def angle_check(angle, proceed2):
     while not proceed2:    
         if float_check(angle):
             angle = float(angle)
@@ -169,7 +141,7 @@ def angle_check(float_check, angle, proceed2):
             proceed2 = False
     return angle
 
-def input_check(int_check, choice, proceed):
+def input_check(choice, proceed):
     while not proceed:
         if int_check(choice):
             choice = int(choice)
@@ -183,6 +155,34 @@ def input_check(int_check, choice, proceed):
             choice = input("Enter here once again: ")
             proceed = False
     return choice
+    
+def smart_sin(x, accuracy):      
+        
+    if 0 <= x <= (1*pi)/4:
+        result = not_numpy_sin(x, accuracy)
+        
+    if (1*pi)/4 < x <= (2*pi)/4:
+        result = sqrt(1-( not_numpy_sin( (pi/2)-x, accuracy) )**2 )
+        
+    if (2*pi)/4 < x <= (3*pi)/4:
+        result = sqrt(1-( not_numpy_sin( x-(pi/2), accuracy) )**2 )
+        
+    if (3*pi)/4 < x <= (4*pi)/4:
+        result = not_numpy_sin(pi-x, accuracy)
+        
+    if (4*pi)/4 < x <= (5*pi)/4:
+        result = -not_numpy_sin(x-pi, accuracy)
+        
+    if (5*pi)/4 < x <= (6*pi)/4:
+        result = -sqrt(1-( not_numpy_sin( (3*pi/2)-x, accuracy) )**2 )
+        
+    if (6*pi)/4 < x <= (7*pi)/4:
+        result = -sqrt(1-( not_numpy_sin( x-(3*pi/2), accuracy) )**2 )
+        
+    if (7*pi)/4 < x <= (8*pi)/4:
+        result = -not_numpy_sin(2*pi-x, accuracy)
+        
+    return result
 #-----------------------------------------------------------------------------------------------------------------------------------
 #Actual display
 print("This program finds the values of trignometric functions.")
@@ -203,7 +203,7 @@ choice = input("Be not afraid! Enter here: ")
 
 proceed = False
 
-choice = input_check(int_check, choice, proceed)
+choice = input_check(choice, proceed)
 
 print("What is thy angle, mortal!")
 
@@ -211,7 +211,7 @@ angle = input("")
 
 proceed2 = False
 
-angle = angle_check(float_check, angle, proceed2)
+angle = angle_check(angle, proceed2)
 
 #-----------------------------------------------------------------------------------------------------------------------------------
 
