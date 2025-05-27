@@ -122,6 +122,7 @@ def not_numpy_sin(x, precision):
     return sum(terms)
 
 def not_numpy_cos(x, degree):
+    #Bounding is needed here since the addition of the pi/2 can push it to be bigger than 2pi
     return smart_sin(bounding(x + (pi/2)), degree)
 
 def not_numpy_tan(x, degree):
