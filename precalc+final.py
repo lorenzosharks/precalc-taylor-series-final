@@ -122,7 +122,7 @@ def not_numpy_sin(x, precision):
     return sum(terms)
 
 def not_numpy_cos(x, degree):
-    return smart_sin(x + (pi/2), degree)
+    return smart_sin(bounding(x + (pi/2)), degree)
 
 def not_numpy_tan(x, degree):
     numerator = smart_sin(bounding(x), degree)
